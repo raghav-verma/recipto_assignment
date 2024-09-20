@@ -68,7 +68,7 @@ class DetailsScreen extends StatelessWidget {
                                 "3% cashback • ₹250 Welcome Bonus",
                                 style: TextStyle(
                                   color: Colors.grey,
-                                  fontSize: 16,
+                                  fontSize: 14,
                                 ),
                               ),
                             ],
@@ -89,47 +89,62 @@ class DetailsScreen extends StatelessWidget {
                         height: 20,
                       ),
 
-                      GridView.count(
-                        shrinkWrap: true,
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 30,
-                        mainAxisSpacing: 30,
-                        childAspectRatio: (1 / 1.3),
-                        children: [
-                          _buildDealCard(
-                            icon: AssetConstants.payAtStore,
-                            title: 'Pay using my',
-                            subtitle: 'Balance 500',
-                            buttonText: 'Pay Bill',
-                            startColor: const Color(0xFFB9E8FC),
-                            endColor: const Color(0xFFE3F2FD),
-                          ),
-                          _buildDealCard(
-                            icon: AssetConstants.buyCoins,
-                            title: 'Buy 500',
-                            subtitle: 'for just ₹450',
-                            buttonText: 'Get for ₹450',
-                            startColor: const Color(0xFFFFD3E2),
-                            endColor: const Color(0xFFFDE2FF),
-                          ),
-                          _buildDealCard(
-                            icon: AssetConstants.offers,
-                            title: 'Shop above',
-                            subtitle: '₹899 & get 50',
-                            buttonText: 'Pay Bill',
-                            startColor: const Color(0xFFFFF5DA),
-                            endColor: const Color(0xFFFFFCE1),
-                          ),
-                          _buildDealCard(
-                            icon: AssetConstants.storeCashback,
-                            title: 'Purchase at store',
-                            subtitle: '& get 5% back',
-                            buttonText: 'Pay Bill',
-                            startColor: const Color(0xFFB9E8FC),
-                            endColor: const Color(0xFFE3F2FD),
-                          ),
-                        ],
+                      LayoutBuilder(
+                        builder: (context, constraints) {
+                          // Get the screen width
+                          double screenWidth = constraints.maxWidth;
+
+                          int crossAxisCount =2;
+
+                          // Adjust the spacing and child aspect ratio based on screen size
+                          double crossAxisSpacing = screenWidth < 600 ? 20.0 : 30.0;
+                          double mainAxisSpacing = screenWidth < 600 ? 20.0 : 30.0;
+                          double childAspectRatio = screenWidth < 600 ? (1 / 1.6) : (1 / 1.3);
+
+                          return GridView.count(
+                            shrinkWrap: true,
+                            crossAxisCount: crossAxisCount,
+                            crossAxisSpacing: crossAxisSpacing,
+                            mainAxisSpacing: mainAxisSpacing,
+                            childAspectRatio: childAspectRatio,
+                            children: [
+                              _buildDealCard(
+                                icon: AssetConstants.payAtStore,
+                                title: 'Pay using my ',
+                                subtitle: 'Balance 500',
+                                buttonText: 'Pay Bill',
+                                startColor: Color(0xFFB9E8FC), // Light blue
+                                endColor: Color(0xFFE3F2FD),   // Soft blue
+                              ),
+                              _buildDealCard(
+                                icon: AssetConstants.buyCoins,
+                                title: 'Buy 500',
+                                subtitle: 'for just ₹450',
+                                buttonText: 'Get for ₹450',
+                                startColor: Color(0xFFFFD3E2), // Light pink
+                                endColor: Color(0xFFFDE2FF),   // Soft pink/purple
+                              ),
+                              _buildDealCard(
+                                icon: AssetConstants.offers,
+                                title: 'Shop above ₹899 ',
+                                subtitle: '& get 50',
+                                buttonText: 'Pay Bill',
+                                startColor: Color(0xFFFFF5DA), // Light peach
+                                endColor: Color(0xFFFFFCE1),   // Very soft beige
+                              ),
+                              _buildDealCard(
+                                icon: AssetConstants.storeCashback,
+                                title: 'Purchase at store ',
+                                subtitle: '& get 5% back',
+                                buttonText: 'Pay Bill',
+                                startColor: Color(0xFFE3FFDD), // Light green
+                                endColor: Color(0xFFEFFFE6),   // Soft mint green
+                              ),
+                            ],
+                          );
+                        },
                       )
+
                     ],
                   ),
                 ),
@@ -275,7 +290,7 @@ class DetailsScreen extends StatelessWidget {
               if (subtitle.isNotEmpty)
                 Text(
                   subtitle,
-                  style: const TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.w800),
+                  style: const TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.w800),
                 ),
             ],
           ),
@@ -293,9 +308,10 @@ class DetailsScreen extends StatelessWidget {
                   child: Text(
                     buttonText,
                     style: const TextStyle(
-                      fontSize: 18,
+                      fontSize: 13,
                       color: Colors.black,
                     ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
             ],
